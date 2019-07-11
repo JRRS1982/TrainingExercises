@@ -91,4 +91,16 @@ describe 'VendingMachine' do
       subject.print_products
     end
   end
+
+  context '.cash_converts' do
+    it 'given an array of coins it can convert it to decimal' do
+      subject.restock_coins(coin_name: '1p', coin_count: 3)
+      expect(subject.cash_converters(change)).to eq(3)
+    end
+    
+    it 'given an array of coins it can convert it to decimal' do
+      subject.restock_coins(coin_name: '1p', coin_count: 5)
+      expect(subject.cash_converters(change)).to eq(5)
+    end
+  end
 end
