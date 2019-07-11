@@ -5,9 +5,6 @@ class VendingMachine
   def initialize
     @change = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
     @products = []
-    @product_count_helper = 0
-    cash_converters_temp = 0
-    return_temp_value = 0
   end
   
   def cash_converters(hash_input)
