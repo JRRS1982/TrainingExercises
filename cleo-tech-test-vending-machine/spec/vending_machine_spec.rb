@@ -102,5 +102,17 @@ describe 'VendingMachine' do
       subject.restock_coins(coin_name: '1p', coin_count: 5)
       expect(subject.cash_converters(change)).to eq(5)
     end
+
+    it 'given a different array of coins it can convert it to decimal' do
+      subject.restock_coins(coin_name: '1p', coin_count: 1)
+      subject.restock_coins(coin_name: '2p', coin_count: 1)
+      subject.restock_coins(coin_name: '5p', coin_count: 1)
+      subject.restock_coins(coin_name: '10p', coin_count: 1)
+      subject.restock_coins(coin_name: '20p', coin_count: 1)
+      subject.restock_coins(coin_name: '50p', coin_count: 1)
+      subject.restock_coins(coin_name: '£1', coin_count: 1)
+      subject.restock_coins(coin_name: '£2', coin_count: 1)
+      expect(subject.cash_converters(change)).to eq(388)
+    end
   end
 end
