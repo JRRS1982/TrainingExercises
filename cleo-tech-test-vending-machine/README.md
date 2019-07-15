@@ -123,7 +123,6 @@ I want the buyer to be given the product after they have entered their selection
 and paid enought for it,
 so that there is valid exchange of goods for a fee.
 
-
 > Given.. a buyer has entered enough for the product,
 >
 > When.. the product is available,

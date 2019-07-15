@@ -33,4 +33,17 @@ describe 'FEATURES' do
     subject.pay(coin_name: '1p', coin_count: 1)
     expect(subject.cash_converters(subject.buyer_paid)).to eq(1)
   end
+
+  it 'BUY PRODUCT WITH CHANGE BUYER PAID' do
+    expect(STDOUT).to receive(:puts).with("Here's your Mint Aero")
+    subject.restock_products(product: mint_aero_double, product_count: 5)
+    subject.restock_change(coin_name: '1p', coin_count: 7)
+    subject.restock_change(coin_name: '2p', coin_count: 7)
+    subject.restock_change(coin_name: '5p', coin_count: 7)
+    subject.restock_change(coin_name: '50p', coin_count: 7)
+    subject.pay(coin_name: '50p', coin_count: 1)
+    subject.pay(coin_name: '5p', coin_count: 1)
+    subject.pay(coin_name: '2p', coin_count: 4)
+    subject.buy('Mint Aero')
+  end
 end

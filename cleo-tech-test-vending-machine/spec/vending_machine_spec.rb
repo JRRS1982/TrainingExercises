@@ -116,7 +116,7 @@ describe 'VendingMachine' do
   end
 
   context '.pay' do
-    it 'keeps track of what the buyer has entered to the machine' do
+    it 'has a pay method' do
       expect(subject).to respond_to(:pay)
     end
 
@@ -135,6 +135,18 @@ describe 'VendingMachine' do
       subject.pay(coin_name: '£1', coin_count: 1)
       subject.pay(coin_name: '£2', coin_count: 1)
       expect(subject.cash_converters(subject.buyer_paid)).to eq(388)
+    end
+  end
+
+  context '.buy' do
+    it 'has a buy method' do
+      expect(subject).to respond_to(:buy)
+    end
+
+     it 'prints out the heres your product message if it is available' do
+      expect(STDOUT).to receive(:puts).with("Here's your Mint Aero")
+      subject.restock_products(product: mint_aero_double, product_count: 2)
+      subject.buy('Mint Aero')
     end
   end
 end

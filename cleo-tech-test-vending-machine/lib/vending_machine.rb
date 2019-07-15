@@ -9,6 +9,10 @@ class VendingMachine
     @buyer_paid = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
   end
 
+  def buy(product)
+    puts "Here's your #{product}"
+  end
+
   def cash_converters(hash)
     return_temp_value = 0
     hash.each do |key, value|
