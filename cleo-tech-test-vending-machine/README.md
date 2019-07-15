@@ -40,7 +40,6 @@ so that I can sell my stock to willing buyers.
 >
 > Then.. It is stored it the stock attribute of the machine.
 
-
 COMPLETE:
 As a vending machine owner,
 I want to be able to restock my vending machine with change,
