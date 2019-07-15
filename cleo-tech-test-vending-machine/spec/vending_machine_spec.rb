@@ -165,4 +165,23 @@ describe 'VendingMachine' do
       expect(subject.paid_enough(subject.buyer_paid, kit_kat_double.price)).to be(true)
     end
   end
+
+  context '.take_payment' do
+    it 'takes cost of the product away from the buyer paid hash' do
+      subject.restock_products(product: kit_kat_double, product_count: 3)
+      subject.pay(coin_name: '20p', coin_count: 1)
+      subject.pay(coin_name: '50p', coin_count: 1)
+      subject.buy('Kitkat Chunky')
+      expect(subject.cash_converters(subject.buyer_paid)).to eq(20)
+    end
+
+    it 'takes cost of the product away from the buyer paid hash' do
+      subject.restock_products(product: kit_kat_double, product_count: 3)
+      subject.pay(coin_name: '10p', coin_count: 7)
+      subject.pay(coin_name: '£1', coin_count: 1)
+      subject.buy('Kitkat Chunky')
+      binding.pry
+      expect(subject.cash_converters(subject.buyer_paid)).to eq(120)
+    end
+  end
 end

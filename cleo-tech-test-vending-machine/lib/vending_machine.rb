@@ -15,10 +15,11 @@ class VendingMachine
     else
       @products.each_with_index do |x, index|
         if x.name == product_to_find && paid_enough(buyer_paid, x.price) == true
+          take_payment(x.price)
           puts "Here's your #{product_to_find}"
           @products.delete_at(index)
           break
-        elseif x.name == product_to_find && paid_enough(buyer_paid, x.price) == false
+        elsif x.name == product_to_find && paid_enough(buyer_paid, x.price) == false
           puts "You havn't paid enough for #{x} yet, its price is #{x.price}please enter more"
         elsif products.length == index + 1
           puts "Sorry we have no #{product_to_find} left"
@@ -27,13 +28,26 @@ class VendingMachine
     end
   end
 
-  # another method i should make private
+  def take_payment(price)
+    price_outstanding = price
+    buyer_paid.each do |key, value|
+      if price_outstanding == string_to_value(key)
+        p 'here'
+        price_outstanding -= string_to_value(key)
+# need to error handle this so that coin count doesnt drop below zero.
+        @buyer_paid[key] -= 1
+        @change[key] += 1
+      end
+    end
+  end
+
+# another method i should make private
   def paid_enough(hash, price)
     temp_paid = cash_converters(hash)
     if temp_paid >= price then true else false end
   end
 
-  # thinking about making this private.
+# thinking about making this private.
   def cash_converters(hash)
     return_temp_value = 0
     hash.each do |key, value|
@@ -62,7 +76,7 @@ class VendingMachine
   end
 
   # not great, but does what it needs to do when considering explict £ sign use.
-  # also probably should be just a helper / private, but wrote tests.
+  # also probably should be just a helper / private.
   def string_to_value(string)
     case string
     when '1p'
@@ -98,7 +112,7 @@ class VendingMachine
     end
   end
 
-  #  thinking about making this private.
+  # thinking about making this private.
   def unique_products
     @products.uniq
   end

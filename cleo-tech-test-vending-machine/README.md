@@ -38,7 +38,7 @@ so that I can sell my stock to willing buyers.
 >
 > When.. I add it to the vending machine,
 >
-> Then.. It is stored it the stock attribute of the machine.
+> Then.. It is stored in the stock attribute of the machine.
 
 COMPLETE:
 As a vending machine owner,
@@ -71,17 +71,19 @@ so that I know what coins I need to restock it with.
 >
 > When.. I use the print coins method (or similar),
 >
-> Then.. I am provided a list of all the coins in the machine at the moment.
+> Then.. I am provided a list of all the coins in the machine at that moment.
 
+COMPLETE
 As a vending machine owner,
 I want the vending machine to allow the user to enter enough change, to buy a product from the machine.
 
 > Given.. the vending machine has a product and the user has entered enough change to the machine
 >
-> When they select buy product (or similar) and select a product that is in stock.
+> When they select buy product and select a product that is in stock.
 >
 > Then the selected product is removed from the stock in the machine and the change the machine holds increases by the cost of the product and no more.
 
+COMPLETE
 As a vending machine owner,
 I want the vending machine to ask the buyer for more money if they are short,
 so that i dont provide goods to the buyer at below my set price.
