@@ -143,21 +143,26 @@ describe 'VendingMachine' do
       expect(subject).to respond_to(:buy)
     end
 
-    it 'prints out the product message if it is available' do
-      expect(STDOUT).to receive(:puts).with("Here's your Mint Aero")
-      subject.restock_products(product: mint_aero_double, product_count: 2)
+    it 'doesnt prints out the product message if any product unavailable' do
+      expect(STDOUT).to receive(:puts).with('Sorry we have no Mint Aero left')
       subject.buy('Mint Aero')
     end
 
-    it 'doesnt prints out the product message if not available' do
-      expect(STDOUT).to receive(:puts).with("Sorry we have no Mint Aero left")
-      subject.buy('Mint Aero')
-    end
-
-    it 'doesnt prints out the product message if not available' do
-      expect(STDOUT).to receive(:puts).with("Sorry we have no Mint Aero left")
+    it 'doesnt prints out the product message if this product is navailable' do
+      expect(STDOUT).to receive(:puts).with('Sorry we have no Mint Aero left')
       subject.restock_products(product: kit_kat_double, product_count: 2)
       subject.buy('Mint Aero')
+    end
+  end
+
+  context '.paid_enough' do
+    it 'takes in a hash and a price and returns false if not paid enough' do
+      expect(subject.paid_enough(subject.buyer_paid, kit_kat_double.price)).to be(false)
+    end
+
+    it 'takes in a hash and a price and returns true if paid enough' do
+      subject.pay(coin_name: '£1', coin_count: 2)
+      expect(subject.paid_enough(subject.buyer_paid, kit_kat_double.price)).to be(true)
     end
   end
 end

@@ -9,21 +9,28 @@ class VendingMachine
     @buyer_paid = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
   end
 
-  def buy(product_to_find)  
+  def buy(product_to_find)
     if products.empty?
       puts "Sorry we have no #{product_to_find} left"
     else
       @products.each_with_index do |x, index|
-        if x.name == product_to_find
-          p 'there'
+        if x.name == product_to_find && paid_enough(buyer_paid, x.price) == true
           puts "Here's your #{product_to_find}"
           @products.delete_at(index)
-          break 
+          break
+        elseif x.name == product_to_find && paid_enough(buyer_paid, x.price) == false
+          puts "You havn't paid enough for #{x} yet, its price is #{x.price}please enter more"
         elsif products.length == index + 1
           puts "Sorry we have no #{product_to_find} left"
         end
       end
     end
+  end
+
+  # another method i should make private
+  def paid_enough(hash, price)
+    temp_paid = cash_converters(hash)
+    if temp_paid >= price then true else false end
   end
 
   # thinking about making this private.
