@@ -9,10 +9,24 @@ class VendingMachine
     @buyer_paid = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
   end
 
-  def buy(product)
-    puts "Here's your #{product}"
+  def buy(product_to_find)  
+    if products.empty?
+      puts "Sorry we have no #{product_to_find} left"
+    else
+      @products.each_with_index do |x, index|
+        if x.name == product_to_find
+          p 'there'
+          puts "Here's your #{product_to_find}"
+          @products.delete_at(index)
+          break 
+        elsif products.length == index + 1
+          puts "Sorry we have no #{product_to_find} left"
+        end
+      end
+    end
   end
 
+  # thinking about making this private.
   def cash_converters(hash)
     return_temp_value = 0
     hash.each do |key, value|
@@ -41,6 +55,7 @@ class VendingMachine
   end
 
   # not great, but does what it needs to do when considering explict £ sign use.
+  # also probably should be just a helper / private, but wrote tests.
   def string_to_value(string)
     case string
     when '1p'
@@ -76,6 +91,7 @@ class VendingMachine
     end
   end
 
+  #  thinking about making this private.
   def unique_products
     @products.uniq
   end
