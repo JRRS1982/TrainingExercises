@@ -6,7 +6,7 @@ class VendingMachine
   def initialize
     @products = []
     @change = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
-    @buyer_paid = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
+    @buyer_paid = { '£2' => 0, '£1' => 0, '50p' => 0, '20p' => 0, '10p' => 0, '5p' => 0, '2p' => 0, '1p' => 0 }
   end
 
   def buy(product_to_find)
@@ -31,8 +31,7 @@ class VendingMachine
   def take_payment(price)
     price_outstanding = price
     buyer_paid.each do |key, value|
-      if price_outstanding == string_to_value(key)
-        p 'here'
+      while price_outstanding >= string_to_value(key) && value > 0
         price_outstanding -= string_to_value(key)
 # need to error handle this so that coin count doesnt drop below zero.
         @buyer_paid[key] -= 1
@@ -41,7 +40,7 @@ class VendingMachine
     end
   end
 
-# another method i should make private
+# thinking about making this private.
   def paid_enough(hash, price)
     temp_paid = cash_converters(hash)
     if temp_paid >= price then true else false end
@@ -75,8 +74,7 @@ class VendingMachine
     end
   end
 
-  # not great, but does what it needs to do when considering explict £ sign use.
-  # also probably should be just a helper / private.
+# thinking about making this private.
   def string_to_value(string)
     case string
     when '1p'
@@ -126,7 +124,7 @@ class VendingMachine
     end
   end
 
-  # probably want to make this method private, but not yet.
+  # thinking about making this private.
   def product_count(product_to_find)
     product_count_helper = 0
     @products.each do |z|

@@ -235,10 +235,10 @@ No API used in this project.
 
 ## Reflection / further development
 
-At the moment I have products and coins, and a method to convert a change hash
-to a decimal amount... so next steps would be to work on coins added to machine
-by the buyer... and start considering whether the decimal amount in buyers
-'deposit' allows purchase of the selected product.... not long to go!
+At the moment I have products, coins for buyer and vender and methods to restock
+everything, plus the buy method to buy products if they are in stock. Have not
+got great error handling so would develop on that, plus need to return coins to
+buyer, which is the last real feature to complete.
 
 ## Credits / team members
 
